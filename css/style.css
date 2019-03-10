@@ -398,6 +398,53 @@ ol.type li a:hover {
 	padding: 5px;
 	color: #F4D03F;
 }
+
+/* Events Section */
+#events {
+	padding: 140px 0;
+	display: none;
+}
+
+.event-info-main-wrapper {
+	display: flex;
+    align-items: center;
+}
+
+.event-registration-btn {
+	color: #FFF;
+    background: #DA3846;
+    padding: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.event-info-wrapper {
+	text-align: left;
+    width: 400px;
+}
+
+.event-place {
+	color: #DA3846;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.event-banner-container {
+	display: flex;
+    flex-direction: column;
+}
+
+.event-logo {
+	width: 200px;
+    height: 200px;
+    margin: 0px 20px;
+}
+
+.event-title {
+	font-size: 30px;
+}
+
 /* Team Section */
 #team, #techlist {
 	padding: 140px 0;
@@ -769,9 +816,23 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 	padding: 20%;
 }
 
+.event-qrcode {
+	margin-top: 30px;
+}
+
+.event-info-main-wrapper {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
 .snap-img {
     margin-bottom: 30px;
     margin-right: 0px;
+}
+
+.event-info-wrapper {
+	text-align: center !important;
 }
     
 .tshirt-img {
@@ -826,8 +887,16 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 	font-size: 5em;
 }
 
+.event-qrcode {
+	margin-top: 30px;
+}
+
 .main-header-logo {
 	width: 150px;
+}
+
+.event-info-wrapper {
+	width: 350px !important;
 }
 
 .t4h-tag-cloud-img-mobile {

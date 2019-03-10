@@ -1,8 +1,55 @@
 
 function main() {
 
+function getFormattedDate(eventDate) {
+  let date = new Date(eventDate);
+
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"];
+  return weekDays[date.getUTCDay()] + ", " + monthNames[date.getUTCMonth()] + " " + date.getUTCDate() + ", " + date.getUTCFullYear();
+}
+
+function getFormattedTime(eventTime) {
+  let date = new Date(eventTime);
+
+   let isPMTime = date.getHours() > 12;
+   return (date.getHours() > 12 ? (date.getHours() - 12) : date.getHours()) + ":" + 
+   (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes) + (isPMTime ? " PM" : " AM");
+}
+
 (function () {
    'use strict';
+
+    let upcomingEvent;
+
+    $.ajax({
+      url: "https://us-central1-tech4hood.cloudfunctions.net/getEvents",
+      type: "GET"
+    }).done(function(data) {
+      if (data && data.upcomingEvents.length > 0) {
+        $("#events").show();
+
+        upcomingEvent = data.upcomingEvents[0];
+
+        $(".event-title").text(upcomingEvent.name);
+
+        if (upcomingEvent.venue) {
+          $(".event-place").text(upcomingEvent.venue.name);
+          $(".event-qrcode").attr('src', 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + upcomingEvent.link);
+          $(".event-date").text(getFormattedDate(upcomingEvent.local_date));
+          $(".event-time").text(getFormattedTime(upcomingEvent.local_date + " " + upcomingEvent.local_time));
+          $(".event-location").text(upcomingEvent.venue.address_1);
+          $(".event-city").text(upcomingEvent.venue.city + ", " + upcomingEvent.venue.localized_country_name);
+        }
+      }
+    });
+
+    $(".event-registration-btn").click(function() {
+      window.open(upcomingEvent.link, 'target=_blank');
+    });
 
 	// Hide .navbar first
 	$(".navbar").hide();
@@ -69,10 +116,7 @@ function main() {
         singleItem:true
         });
 
-  	});
-	
-	
-
+    });
   // jQuery Parallax
   function initParallax() {
     $('#intro').parallax("100%", 0.3);
